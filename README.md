@@ -35,7 +35,7 @@ The steps to run the code are the following:
 - From the root directory, digit `roscore` to run the master and then `catkin_make`. This last command builds packages and automates the process of compiling and generating executable files from source code in a catkin workspace.
 - If the user has not yet install xterm, it's possible to install it with `sudo apt-get install xterm`. xterm is a terminal emulator for the X Window System, which is a graphical user interface used in Unix-like operating systems.
 - Please, check if all files in *scripts* folder are executable: go in the *scripts* folder, digit `ls`and if the files are written in green, they are executable; otherwise it's possible to digit `chmod +x "name_of_the_file"` to make it executable. 
-- To run the code and see the enviroment: `roslaunch assignment_2_2023 assignment1.launch`. This command runs all the nodes; but if the user wants to run a specific node, it's possible with this command `rosrun assignment_2_2023 "nome_nodo".py`. 
+- To run the code and see the enviroment: `roslaunch assignment_2_2023 assignment1.launch`. This command runs all the nodes; but if the user wants to run a specific node, it's possible with this command `rosrun assignment_2_2023 "node_name".py`. 
 
 ## Description of the assignment
 It's required to create a new package, in which you will develop three nodes:
