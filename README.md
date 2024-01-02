@@ -51,7 +51,7 @@ And then create a launch file to start the whole simulation. Use a parameter to 
 
 ## How the code was developed
 The code was developed step by step and the first node implemented was (a). \
-The nodes communicates through messages; for this reason in the project there is folder, named *msg* and inside there is the file `msg.struct.msg` which defines the structure of the (custom) ROS message: position ("float 64 x" and "float64 y") and velocity ("float64 vel_x" and "float64 vel_y") of the robot. If we want to include a message in our project it's also required to modify the `CMakeLists.txt`. \
+The nodes communicates through messages; for this reason in the project there is folder, named *msg* and inside there is the file `msg.struct.msg` which defines the structure of the (custom) ROS message: position ("float 64 x" and "float64 y") and velocity ("float64 vel_x" and "float64 vel_y") of the robot. If a message is included in the project, it's required to modify the `CMakeLists.txt`. \
 Then, in the folder *scripts* a file named `action_client.py` is created and this is the pseudo code: 
 ```python
 Import the necessary modules and libraries
@@ -74,7 +74,7 @@ To accomplish this task, some functions are implemented:
 
 In the `main_function` the ROS node is initialized, the publisher is set up for "/position_velocity" topic and "/odom" topic gets the current position and velocity information. At the end it is called the previous function `start_client`.\
 
-In *launch* folder, there are two files: `sim_w1.launch` and `assignment1.launch`. The last one is written in XML format and it is used to simplify the process of starting multiple nodes; for this reason, within this file it's possible to find all the defined nodes. Here, xterm is used and it allows to open a new terminal where the user can write the goal coordinates and also delete the goal. Please, notice this terminal is used only for this purposes! 
+In *launch* folder, there are two files: `sim_w1.launch` and `assignment1.launch`. The last one is written in XML format and it is used to simplify the process of starting multiple nodes; for this reason, within this file it's important to delcare all the defined nodes. Here, xterm is used and it allows to open a new terminal where the user can write the goal coordinates and also delete the goal. Please, notice this terminal is used only for this purposes! 
 
 Node (b) is implemented in another file, named `service.py` in *scripts* folder). This node is a service and for this reason a new folder, *srv* is created. Within this folder, the file `last_goal_srv.srv` define the structure of the service file. Usually, a service file is composed by two parts: the *request* and the *responce*. In this type of requested service, the responce is the needed part, because the user wants to see the last coordinates provided. Also the files `CMakeList.txt` and `assignment1.launch` are modified. \
 To accomplish the task, some functions are implemented:
