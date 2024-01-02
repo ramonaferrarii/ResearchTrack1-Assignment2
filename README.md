@@ -22,7 +22,7 @@ positions from the topic joint_states to calculate the forward kinematics of the
 The robot may be controlled using ROS topics (/cmd_vel) (a nice tool is teleop_twist_keyboard, which may be
 launched with `rosrun teleop_twist_keyboard teleop_twist_keyboard.py`). When moving the robot around,
 information coming from sensors may be visualized in Rviz (ex: odom, or cameras). \
-The starting point of this assignment can be dowloaded at the following link: `https://github.com/CarmineD8/assignment_2_2023`. Within there are 3 already implemented nodes: \
+The starting point of this assignment can be dowloaded at the following link: <a href="https://github.com/CarmineD8/assignment_2_2023">https://github.com/CarmineD8/assignment_2_2023</a>. Within there are 3 already implemented nodes: \
 
 - `go_to_point_service.py`: it's a service  node which allows the robot to reach a point, moving towards the desired position.
 - `bug_as.py`: it is the action server node that receives the desired position from the client and calls the needed services to bring the robot to the desired position.
