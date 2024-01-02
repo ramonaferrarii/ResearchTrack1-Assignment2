@@ -100,7 +100,8 @@ To close the enviroment, press `Ctrl+C` and `gazebo-2` in the same terminal wher
 - The user does not know the dimension of the arena; so it's possible to implement a function that computes this information, to avoid the user to send useless coordinates.
 - Improve the direction in which the robots turns when the goal is beyond the wall.
 - Choose a better way to compute the average speed: in this case a fixed dimension list is defined, but it's possible to ask directly the user the dimension of the averaging window.
-- 
+
+However, the code accomplish quite well the tasks. 
 
 
 
