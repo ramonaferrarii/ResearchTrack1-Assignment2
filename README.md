@@ -72,7 +72,7 @@ To accomplish this task, some functions are implemented:
 - `feedback_callback`: this function checks if the goal is reached by the robot by comparing the feedback status (`feedbak.stat`) with the string `Target reached!`. If the goal is reaches, it sets the variable `finished` to True.
 - `start_client`: it is the main function; it connects to the action server "/reaching_goal" and waits for it to become available. It then prompts the user to enter the goal coordinates (x,y) and sends the goal to the server. If the coordinates are not acceptable, print the sentence "please provide both coordinates!".  It also sets up a loop to continuously check for user input to cancel the goal if desired.\
 
-In the `main_function` the ROS node is initialized, the publisher is set up for "/position_velocity" topic and "/odom" topic gets the current position and velocity information. At the end it is called the previous function `start_client`.\
+In the `main_function` the ROS node is initialized, the publisher is set up for "/position_velocity" topic and "/odom" topic gets the current position and velocity information. At the end it is called the previous function `start_client`. 
 
 In *launch* folder, there are two files: `sim_w1.launch` and `assignment1.launch`. The last one is written in XML format and it is used to simplify the process of starting multiple nodes; for this reason, within this file it's important to delcare all the defined nodes. Here, xterm is used and it allows to open a new terminal where the user can write the goal coordinates and also delete the goal. Please, notice this terminal is used only for this purposes! 
 
