@@ -4,7 +4,7 @@ Ramona Ferrari, S4944096
 This is a report for the second assignment of the **Research Track 1** course, for the **Robotics Engineering Master's degree** at the University of Genoa.
 
 ## Description of the Simulator
-The simulator shows a 3D simulator enviroment where a robot can move. In the enviroment (specified in the file named `sim_w1.launch`) there are some obstacles: the walls.
+The simulator shows a 3D simulator enviroment where a robot can move. In the squared arena (specified in the file named `sim_w1.launch`) there are some obstacles: the walls.
 In the enviroment there are two windows:
 
 - **Rviz**: is a 3-dimensional tool for ROS Visualization. It allows the user to view the
@@ -100,6 +100,7 @@ To close the enviroment, press `Ctrl+C` and `gazebo-2` in the same terminal wher
 ## Further Improvements
 - The user does not know the dimension of the arena; so it's possible to implement a function that computes this information, to avoid the user to send useless coordinates.
 - Improve the direction in which the robots turns when the goal is beyond the wall.
+- The velocity of the robot can be changed and also the graphic inteface can be improved.
 - Choose a better way to compute the average speed: in this case a fixed dimension list is defined, but it's possible to ask directly the user the dimension of the averaging window.
 
 However, the code accomplish quite well the tasks. 
