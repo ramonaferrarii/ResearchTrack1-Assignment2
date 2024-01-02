@@ -95,7 +95,7 @@ To accomplish the task, some functions are implemented:
 In the `main` function, there is the initialization of the ROS node and it subscribes to the "/position_velocity" topic to receive position and velocity messages. It also initializes the "service_proxy" to access the "/service" service and waits for it to be available. Then it starts a service server for the "/server" service and spins to keep the node running. \
 This service runs with the command `rosservice call /server`. For computing the distance and the average speed, the library `math` is imported. \\
 
-To close the enviroment and the whole simulation, press `Ctrl+C` and `gazebo-2` in the same terminal where the command `roslaunch assignment_2_2023 assignment1.launch` was launched. 
+To close the enviroment and the whole simulation, press `Ctrl+C` and digit `gazebo-2` in the same terminal where the command `roslaunch assignment_2_2023 assignment1.launch` was launched. 
 
 ## Further Improvements
 - The user does not know the dimension of the arena; so it's possible to implement a function that computes this information, to avoid the user to send useless coordinates.
