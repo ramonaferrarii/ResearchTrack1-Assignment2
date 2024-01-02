@@ -50,6 +50,57 @@ And then create a launch file to start the whole simulation. Use a parameter to 
 
 ## How the code was developed
 The code was developed step by step and the first node implemented was (a). \
+The nodes communicates through messages; for this reason in the project there is folder, named *msg* and inside there is the file `msg.struct.msg` which defines the structure of the (custom) ROS message: position ("float 64 x" and "float64 y") and velocity ("float64 vel_x" and "float64 vel_y") of the robot. If we want to include a message in our project it's also required to modify the `CMakeLists.txt`. \
+Then, in the folder *scripts* a file named `action_client.py` is created and this is the pseudo code: 
+```python
+Import the necessary modules and libraries
+Initialization of the ROS node
+Initialization of the publisher to publish the message
+Initialization of the subscriber to listen the topic /odom and recall of function publish_msg when a new message arrives
+Start of function start_client
+Initialization of a client and read the coordinates by input
+Create an object of type PlanningGoal and set the coordinates of the goal
+Set the variable finished = False
+Send the goal to server + update of the motion
+Until finished is False: every second check if there is input
+If there is input, read the value and if the value is x, delete the goal and set finished = Tue (to stop the loop)
+```
+To accomplish this task, some functions are implemented:
+
+- `publish_msg`: it takes a message as parameter and extracts the position and the velocity information from it. The, it creates a new msg_struct and publishes it.
+- `feedback_callback`: this function checks if the goal is reached by the robot by comparing the feedback status (`feedbak.stat`) with the string `Target reached!`. If the goal is reaches, it sets the variable `finished` to True.
+- `start_client`: it is the main function; it connects to the action server "/reaching_goal" and waits for it to become available. It then prompts the user to enter the goal coordinates (x,y) and sends the goal to the server. If the coordinates are not acceptable, print the sentence "please provide both coordinates!".  It also sets up a loop to continuously check for user input to cancel the goal if desired.\
+
+In the `main_function` the ROS node is initialized, the publisher is set up for "/position_velocity" topic and "/odom" topic gets the current position and velocity information. At the end it is called the previous function `start_client`.\
+
+In *launch* folder, there are two files: `sim_w1.launch` and `assignment1.launch`. The last one is written in XML format and it is used to simplify the process of starting multiple nodes; for this reason, within this file it's possible to find all the defined nodes. Here, xterm is used and it allows to open a new terminal where the user can write the goal coordinates and also delete the goal. Please, notice this terminal is used only for this purposes! \
+
+Node (b) is implemented in another file, named `service.py` in *scripts* folder). This node is a service and for this reason a new folder, *srv* is created. Within this folder, the file `last_goal_srv.srv` define the structure of the service file. Usually, a service file is composed by two parts: the *request* and the *responce*. In this type of requested service, the responce is the needed part, because the user wants to see the last coordinates provided. Also the files `CMakeList.txt` and `assignment1.launch` are modified. \
+To accomplish the task, some functions are implemented:
+
+- `retrieve_last_goal`: it takes as parameter a message and it retrieves the last goal coordinates from the received goal message and stores them in the global variables "last_goal_x" and "last_goal_y".
+- `serve`: this function is a callback function for the service, called *service*. It handles requests for the last goal and it returns the last goal coordinates as a response to the request.
+
+In the `main` function there is the initialization of the ROS node with name `service`, the set up of both service and subscriber and the starting of the node until the node is stopped. \
+This service runs with the command `rosservice call /service` on a terminal of Docker.
+
+At the end, node (c) is implemented in a file named `server.py` (in *scripts* folder). Also for this node, `CMakeList.txt` and `assignment1.launch` are modified. \
+It is a service, so it requires a service file, named `distance_speed_srv.srv`, (in the *srv* folder), because the user wants to see the distance between robot and goal and the average speed of the robot itself. 
+To accomplish the task, some functions are implemented:
+
+- `setPosVel`: it is called whenever a new message is received on the "/position_velocity" topic. It updates the global varibales "current_x" and "current_y" with the new position values from the message. It also computed the magnitude of the velocity vector from the message and appends it to the "averaging_window" list. If the length of the "averaging window" exceeds the specified "window_size" (which is the parameter requested by the assignment), the oldest value is removed from the list.
+- `serve`: it is called when a request is made to the service. It retrieves the last goal position using the "service_proxy" and calculates the Euclidean distance between the current position and the last position. The proxy is used to launch the node (b) and using it for the node (c). This function also computes the average speed by summing all the values in the "averaging_window" list and dividing it by the "window_size". It returns the distance and the spees in the response. 
+
+In the `main` function, there is the initialization of the ROS node and it subscribes to the "/position_velocity" topic to receive position and velocity messages. It also initializes the "service_proxy" to access the "/service" service and waits for it to be available. Then it starts a service server for the "/server" service and spins to keep the node running. \
+This service runs with the command `rosservice call /server`. For computing the distance and the average speed, the library `math` is imported. \\
+
+To close the enviroment, press `Ctrl+C` and `gazebo-2` in the same terminal where the command `roslaunch assignment_2_2023 assignment1.launch` was launched. 
+
+## Further Improvements
+- The user does not know the dimension of the arena; so it's possible to implement a function that computes this information, to avoid the user to send useless coordinates.
+- Improve the direction in which the robots turns when the goal is beyond the wall.
+- Choose a better way to compute the average speed: in this case a fixed dimension list is defined, but it's possible to ask directly the user the dimension of the averaging window.
+- 
 
 
 
