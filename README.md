@@ -31,9 +31,10 @@ The starting point of this assignment can be dowloaded at the following link: `h
 ## Run the Code
 The steps to run the code are the following:
 
-- Go inside the `src` folder of ROS workspace, clone the assignment folder: `git clone mettere mio link di repo` and then move to the correct branch, named master, with the command `git checkout master`. 
+- Go inside the *src* folder of ROS workspace, clone the assignment folder: `git clone mettere mio link di repo` and then move to the correct branch, named master, with the command `git checkout master`. 
 - From the root directory, digit `roscore` to run the master and then `catkin_make`. This last command builds packages and automates the process of compiling and generating executable files from source code in a catkin workspace.
-- If the user has not yet install xterm, it's possible to install it with `sudo apt-get install xterm`. xterm is a terminal emulator for the X Window System, which is a graphical user interface used in Unix-like operating systems. 
+- If the user has not yet install xterm, it's possible to install it with `sudo apt-get install xterm`. xterm is a terminal emulator for the X Window System, which is a graphical user interface used in Unix-like operating systems.
+- Please, check if all files in *scripts* folder are executable: go in the *scripts* folder, digit `ls`and if the files are written in green, they are executable; otherwise it's possible to digit `chmod +x "name_of_the_file"` to make it executable. 
 - To run the code and see the enviroment: `roslaunch assignment_2_2023 assignment1.launch`.
 
 ## Description of the assignment
@@ -73,7 +74,7 @@ To accomplish this task, some functions are implemented:
 
 In the `main_function` the ROS node is initialized, the publisher is set up for "/position_velocity" topic and "/odom" topic gets the current position and velocity information. At the end it is called the previous function `start_client`.\
 
-In *launch* folder, there are two files: `sim_w1.launch` and `assignment1.launch`. The last one is written in XML format and it is used to simplify the process of starting multiple nodes; for this reason, within this file it's possible to find all the defined nodes. Here, xterm is used and it allows to open a new terminal where the user can write the goal coordinates and also delete the goal. Please, notice this terminal is used only for this purposes! \
+In *launch* folder, there are two files: `sim_w1.launch` and `assignment1.launch`. The last one is written in XML format and it is used to simplify the process of starting multiple nodes; for this reason, within this file it's possible to find all the defined nodes. Here, xterm is used and it allows to open a new terminal where the user can write the goal coordinates and also delete the goal. Please, notice this terminal is used only for this purposes! 
 
 Node (b) is implemented in another file, named `service.py` in *scripts* folder). This node is a service and for this reason a new folder, *srv* is created. Within this folder, the file `last_goal_srv.srv` define the structure of the service file. Usually, a service file is composed by two parts: the *request* and the *responce*. In this type of requested service, the responce is the needed part, because the user wants to see the last coordinates provided. Also the files `CMakeList.txt` and `assignment1.launch` are modified. \
 To accomplish the task, some functions are implemented:
