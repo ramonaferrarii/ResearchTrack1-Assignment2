@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to ResearchTrack_Assignment2’s documentation! &mdash; ResearchTrack_Assignment2 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=359c27e9"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            ResearchTrack_Assignment2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Welcome to ResearchTrack_Assignment2’s documentation!</a><ul>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables:</a><ul>
+<li><a class="reference internal" href="#sphinx">Sphinx:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#description-of-the-simulator">Description of the Simulator:</a></li>
+<li><a class="reference internal" href="#motion">Motion:</a></li>
+<li><a class="reference internal" href="#run-the-code">Run the Code:</a></li>
+<li><a class="reference internal" href="#description-of-the-assignment">Description of the Assignment:</a><ul>
+<li><a class="reference internal" href="#module-scripts.action_client">Node (a): Action Client to set target or cancel it.</a><ul>
+<li><a class="reference internal" href="#scripts.action_client.feedback_callback"><code class="docutils literal notranslate"><span class="pre">feedback_callback()</span></code></a></li>
+<li><a class="reference internal" href="#scripts.action_client.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li><a class="reference internal" href="#scripts.action_client.publish_msg"><code class="docutils literal notranslate"><span class="pre">publish_msg()</span></code></a></li>
+<li><a class="reference internal" href="#scripts.action_client.start_client"><code class="docutils literal notranslate"><span class="pre">start_client()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-scripts.service">Node (b) : Service node to return last target.</a><ul>
+<li><a class="reference internal" href="#scripts.service.last_goal_x"><code class="docutils literal notranslate"><span class="pre">last_goal_x</span></code></a></li>
+<li><a class="reference internal" href="#scripts.service.last_goal_y"><code class="docutils literal notranslate"><span class="pre">last_goal_y</span></code></a></li>
+<li><a class="reference internal" href="#scripts.service.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li><a class="reference internal" href="#scripts.service.retrieve_last_goal"><code class="docutils literal notranslate"><span class="pre">retrieve_last_goal()</span></code></a></li>
+<li><a class="reference internal" href="#scripts.service.serve"><code class="docutils literal notranslate"><span class="pre">serve()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-scripts.server">Node (c) : Service node to subscribe robot’s position and velocity and retrieve distance of the robot.</a><ul>
+<li><a class="reference internal" href="#scripts.server.averaging_window"><code class="docutils literal notranslate"><span class="pre">averaging_window</span></code></a></li>
+<li><a class="reference internal" href="#scripts.server.current_x"><code class="docutils literal notranslate"><span class="pre">current_x</span></code></a></li>
+<li><a class="reference internal" href="#scripts.server.current_y"><code class="docutils literal notranslate"><span class="pre">current_y</span></code></a></li>
+<li><a class="reference internal" href="#scripts.server.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li><a class="reference internal" href="#scripts.server.serve"><code class="docutils literal notranslate"><span class="pre">serve()</span></code></a></li>
+<li><a class="reference internal" href="#scripts.server.service_proxy"><code class="docutils literal notranslate"><span class="pre">service_proxy</span></code></a></li>
+<li><a class="reference internal" href="#scripts.server.setPosVel"><code class="docutils literal notranslate"><span class="pre">setPosVel()</span></code></a></li>
+<li><a class="reference internal" href="#scripts.server.window_size"><code class="docutils literal notranslate"><span class="pre">window_size</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">ResearchTrack_Assignment2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to ResearchTrack_Assignment2’s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-researchtrack-assignment2-s-documentation">
+<h1>Welcome to ResearchTrack_Assignment2’s documentation!<a class="headerlink" href="#welcome-to-researchtrack-assignment2-s-documentation" title="Permalink to this heading"></a></h1>
+<p>This is a report for the second assignment of the Research Track 2 course, for the Robotics Engineering Master’s degree at the University of Genoa.
+It’s required to create a new package, in which you will develop your code. The code was developed for Research Track 1 course and now it is properly commented using <em>Sphinx</em>, a tool for creating documentation.</p>
+<section id="indices-and-tables">
+<h2>Indices and tables:<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+<section id="sphinx">
+<h3>Sphinx:<a class="headerlink" href="#sphinx" title="Permalink to this heading"></a></h3>
+<p>Sphinx is an open source documentation tool that allows you to create detailed technical documentation in various formats, such as HTML, PDF, and EPUB. It is widely used to document software projects, APIs, and libraries by writing documents in reStructuredText markup format.</p>
+<p>Sphinx offers a range of advanced features and it is highly flexible and customizable through the use of themes and extensions, which allow you to customize the appearance and functionality of the documentation.</p>
+<p>Sphinx is a very useful tool for developers, technical writers, and documentation teams who want to create well-structured and easily navigable documentation for their projects.</p>
+<p>To install:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">python3-sphinx</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">breathe</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">sphinx-rtd-theme</span></code></p></li>
+</ul>
+<p>In the directory where you have the code to comment, run:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sphinx-quickstart</span></code></p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+<section id="description-of-the-simulator">
+<h2>Description of the Simulator:<a class="headerlink" href="#description-of-the-simulator" title="Permalink to this heading"></a></h2>
+<p>The simulator shows a 3D simulator enviroment where a robot can move. In the squared arena (specified in the file named sim_w1.launch) there are some obstacles: the walls. In the enviroment there are two windows:</p>
+<ul class="simple">
+<li><p>Rviz: is a 3-dimensional tool for ROS Visualization. It allows the user to view the simulated robot model, log sensor information from the robot’s sensors, and replay the logged sensor information. By visualizing what the robot is seeing, thinking, and doing, the user can debug a robot application from sensor inputs to planned (or unplanned) actions. When it starts, three noes are actually executed: <em>joint_state_publisher</em> (it allows the package to read the robot_description parameter from the parameter server, finds all of the non-fixed joints and publishes a JointState message with all those joints defined), <em>robot_state_publisher</em> (it uses the URDF specified by the parameter robot_description and the joint positions from the topic joint_states to calculate the forward kinematics of the robot and publish the results viatf.), <em>rviz</em>.</p></li>
+<li><p>Gazebo is the 3D simulator for ROS. The dynamic simulation is based on various physics engines (ODE, Bullet, Simbody and DART), it includes sensors, plugin to customize robots, sensors and the eniroment, realistic rendering of the enviroment and the robots and it allows ROS integration.</p></li>
+</ul>
+</section>
+<section id="motion">
+<h2>Motion:<a class="headerlink" href="#motion" title="Permalink to this heading"></a></h2>
+<p>The robot may be controlled using ROS topics (<em>/cmd_vel</em>) (a nice tool is teleop_twist_keyboard, which may be launched with rosrun teleop_twist_keyboard teleop_twist_keyboard.py). When moving the robot around, information coming from sensors may be visualized in Rviz (ex: odom, or cameras).
+The starting point of this assignment can be dowloaded at the following link: <cite>&lt;https://github.com/CarmineD8/assignment_2_2023&gt;</cite>.</p>
+<p>Within there are 3 already implemented nodes:</p>
+<ul class="simple">
+<li><p>go_to_point_service.py: it’s a service node, implemented as a finite state machine, which allows the robot to reach a point, moving towards the desired position and check if the robot manages to reach it.</p></li>
+<li><p>bug_as.py: it is responsible for determining the actions of the robot based on the <em>change_state</em> function. This node imports messages and services from other nodes to facilitate communication amongst various components of the simulation system. These messages include laser scan data, odometry information, twist commands for velocity control, and services for switching navigation modes. Callback functions are utilized to process the data and update the robot’s position and orientation. The planning function, which considers obstacles in the environment, serves as a callback for the action server and defines the robot’s goal-planning behavior.</p></li>
+<li><p>wall_follow_service.py: it is a service node and it allows the robot to follow the wall if it reaches one along the way and also to avoid the robot crush into it.</p></li>
+</ul>
+</section>
+<section id="run-the-code">
+<h2>Run the Code:<a class="headerlink" href="#run-the-code" title="Permalink to this heading"></a></h2>
+<p>The steps to run the code are the following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">my_repo's_link</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">master</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">roscore</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">catkin_make</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">xterm</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">roslaunch</span> <span class="pre">assignment_2_2023</span> <span class="pre">assignment1.launch.</span></code></p></li>
+</ul>
+<blockquote>
+<div><p>Please, check if all files in scripts folder are executable and make them executable:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lsand</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">+x</span> <span class="pre">name_of_the_file</span></code></p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="description-of-the-assignment">
+<h2>Description of the Assignment:<a class="headerlink" href="#description-of-the-assignment" title="Permalink to this heading"></a></h2>
+<p>It’s required to create a new package, in which you will develop three nodes:</p>
+<ol class="loweralpha simple">
+<li><p>A node that implements an action client, allowing the user to set a target (x, y) or to cancel it. Try to use the feedback/status of the action server to know when the target has been reached. The node also publishes the robot position and velocity as a custom message (x,y, vel_x, vel_z), by relying on the values published on the topic /odom;</p></li>
+<li><p>A service node that, when called, returns the coordinates of the last target sent by the user;</p></li>
+<li><p>Another service node that subscribes to the robot’s position and velocity (using the custom message) and implements a server to retrieve the distance of the robot from the target and the robot’s average speed. And then create a launch file to start the whole simulation. Use a parameter to select the size of the averaging window of node (c).</p></li>
+</ol>
+<section id="module-scripts.action_client">
+<span id="node-a-action-client-to-set-target-or-cancel-it"></span><h3>Node (a): Action Client to set target or cancel it.<a class="headerlink" href="#module-scripts.action_client" title="Permalink to this heading"></a></h3>
+<span class="target" id="module-ResearchTrack_Assignment2"></span><dl class="field-list simple">
+<dt class="field-odd">platform<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Unix</p>
+</dd>
+<dt class="field-even">synopsis<span class="colon">:</span></dt>
+<dd class="field-even"><p>Python client for ResearchTrack_Assignment2</p>
+</dd>
+</dl>
+<p><em>Module author: Ramona Ferrari <a class="reference external" href="mailto:S4944096&#37;&#52;&#48;studenti&#46;unige&#46;it">S4944096<span>&#64;</span>studenti<span>&#46;</span>unige<span>&#46;</span>it</a></em></p>
+<p>This node statisfies the request: it implements an action client, allowing the user to set a t set a target (x,y) or cancel it. It shows on terminal also when the target is reached, printing “Target reached!”</p>
+<p>Setting the target: the node requests both coordinates, otherwise on terminal the sentence “please provide both coordinates!” appears and the robot does not move.</p>
+<p>The feedback of the action server is used to know when the target has been reached and it also publishes the robot position and velocity as a custom message (x,y, vel_x and vel_y),by relying on the values published on the topic /odom.</p>
+<dl class="simple">
+<dt>In this node it’s possible to find several functions:</dt><dd><p>-<em>publish_msg</em> ;
+-<em>feedback_callback</em>;
+-<em>start_client</em> .</p>
+</dd>
+</dl>
+<p>To run the code: <code class="docutils literal notranslate"><span class="pre">roslaunch</span> <span class="pre">assignment_2_2023</span> <span class="pre">assignment1.launch</span></code>.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.action_client.feedback_callback">
+<span class="sig-prename descclassname"><span class="pre">scripts.action_client.</span></span><span class="sig-name descname"><span class="pre">feedback_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feedback</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/action_client.html#feedback_callback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.action_client.feedback_callback" title="Permalink to this definition"></a></dt>
+<dd><p>Function to check if the goal is reached by the the robot by comparing the feedback
+status (feedbak.stat) with the string “Target reached!”. If the goal is reached, it
+sets the variable finished to True.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>feedback</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.action_client.main">
+<span class="sig-prename descclassname"><span class="pre">scripts.action_client.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/action_client.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.action_client.main" title="Permalink to this definition"></a></dt>
+<dd><p>Main function that initializes the ROS node, the publisher is set up for
+“/position_velocity” topic and “/odom” topic gets the current position and velocity information. At the end it is called the previous function “start_client”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.action_client.publish_msg">
+<span class="sig-prename descclassname"><span class="pre">scripts.action_client.</span></span><span class="sig-name descname"><span class="pre">publish_msg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/action_client.html#publish_msg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.action_client.publish_msg" title="Permalink to this definition"></a></dt>
+<dd><p>It takes a message as parameter and extracts the position and the velocity information from it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>msg</strong> – message received from the topic /odom. The type is nav_msgs.msg.Odometry</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.action_client.start_client">
+<span class="sig-prename descclassname"><span class="pre">scripts.action_client.</span></span><span class="sig-name descname"><span class="pre">start_client</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/action_client.html#start_client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.action_client.start_client" title="Permalink to this definition"></a></dt>
+<dd><p>Function to connect the action server “/reaching_goal” and waits for it to become
+available. It then prompts the user to enter the goal coordinates (x,y) and sends the goal to the server. If the coordinates are not acceptable, it prints the sentence “please provide both coordinates!”. It also sets up a loop to continuosly check for user input to cancel the goal if desired.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-scripts.service">
+<span id="node-b-service-node-to-return-last-target"></span><h3>Node (b) : Service node to return last target.<a class="headerlink" href="#module-scripts.service" title="Permalink to this heading"></a></h3>
+<span class="target" id="module-ResearchTrack_Assignment2_service"></span><dl class="field-list simple">
+<dt class="field-odd">platform<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Unix</p>
+</dd>
+<dt class="field-even">synopsis<span class="colon">:</span></dt>
+<dd class="field-even"><p>Python service1 for ResearchTrack_Assignment2</p>
+</dd>
+</dl>
+<p><em>Module author: Ramona Ferrari <a class="reference external" href="mailto:S4944096&#37;&#52;&#48;studenti&#46;unige&#46;it">S4944096<span>&#64;</span>studenti<span>&#46;</span>unige<span>&#46;</span>it</a></em></p>
+<p>This node implements a service that, when explicitly called, returns the coordinates of the last target sent by the user.</p>
+<dl class="simple">
+<dt>There are severals functions implemented:</dt><dd><p><em>retrieve_last_goal</em>;
+<em>serve</em>.</p>
+</dd>
+</dl>
+<p>The command to run the service is <code class="docutils literal notranslate"><span class="pre">rosservice</span> <span class="pre">call</span> <span class="pre">/service</span></code>.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="scripts.service.last_goal_x">
+<span class="sig-prename descclassname"><span class="pre">scripts.service.</span></span><span class="sig-name descname"><span class="pre">last_goal_x</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#scripts.service.last_goal_x" title="Permalink to this definition"></a></dt>
+<dd><p>Global variable to store the last goal on x coordinate</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="scripts.service.last_goal_y">
+<span class="sig-prename descclassname"><span class="pre">scripts.service.</span></span><span class="sig-name descname"><span class="pre">last_goal_y</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#scripts.service.last_goal_y" title="Permalink to this definition"></a></dt>
+<dd><p>Global variable to store the last goal on y coordinate</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.service.main">
+<span class="sig-prename descclassname"><span class="pre">scripts.service.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/service.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.service.main" title="Permalink to this definition"></a></dt>
+<dd><p>Main function to initialize the node and set up of the service and subscriber.</p>
+<p>Args:
+None</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.service.retrieve_last_goal">
+<span class="sig-prename descclassname"><span class="pre">scripts.service.</span></span><span class="sig-name descname"><span class="pre">retrieve_last_goal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/service.html#retrieve_last_goal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.service.retrieve_last_goal" title="Permalink to this definition"></a></dt>
+<dd><p>Function that retrieves the last goal coordinates from the received goal message and
+stores them in the global variables “last_goal_x” and “last_goal_y”.</p>
+<p>Args:
+msg: custom message containing the actual position and velocity of the robot.
+The type of the message is assignment_2_2023.msg.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.service.serve">
+<span class="sig-prename descclassname"><span class="pre">scripts.service.</span></span><span class="sig-name descname"><span class="pre">serve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">req</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/service.html#serve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.service.serve" title="Permalink to this definition"></a></dt>
+<dd><p>Callback function to handle requestes for the last goal.</p>
+<p>Args:
+req: actually not requested.</p>
+</dd></dl>
+
+</section>
+<section id="module-scripts.server">
+<span id="node-c-service-node-to-subscribe-robot-s-position-and-velocity-and-retrieve-distance-of-the-robot"></span><h3>Node (c) : Service node to subscribe robot’s position and velocity and retrieve distance of the robot.<a class="headerlink" href="#module-scripts.server" title="Permalink to this heading"></a></h3>
+<span class="target" id="module-ResearchTrack_Assignment2_server"></span><dl class="field-list simple">
+<dt class="field-odd">platform<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Unix</p>
+</dd>
+<dt class="field-even">synopsis<span class="colon">:</span></dt>
+<dd class="field-even"><p>Python service2 for ResearchTrack_Assignment2</p>
+</dd>
+</dl>
+<p><em>Module author: Ramona Ferrari <a class="reference external" href="mailto:S4944096&#37;&#52;&#48;studenti&#46;unige&#46;it">S4944096<span>&#64;</span>studenti<span>&#46;</span>unige<span>&#46;</span>it</a></em></p>
+<p>This node implements a service to subscribe to the robot’s position and velocity.
+It uses the custom message.
+It also implements a server to retrieve the distance of the robot from the target and the
+robot’s average speed.</p>
+<dl class="simple">
+<dt>There are severals functions implemented:</dt><dd><p><em>setPosVel</em>;
+<em>serve</em>.</p>
+</dd>
+</dl>
+<p>The command to run the service is <code class="docutils literal notranslate"><span class="pre">rosservice</span> <span class="pre">call</span> <span class="pre">/server</span></code>.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="scripts.server.averaging_window">
+<span class="sig-prename descclassname"><span class="pre">scripts.server.</span></span><span class="sig-name descname"><span class="pre">averaging_window</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#scripts.server.averaging_window" title="Permalink to this definition"></a></dt>
+<dd><p>List to store the average speed of the robot in the last “window_size” messages received</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="scripts.server.current_x">
+<span class="sig-prename descclassname"><span class="pre">scripts.server.</span></span><span class="sig-name descname"><span class="pre">current_x</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#scripts.server.current_x" title="Permalink to this definition"></a></dt>
+<dd><p>Global variable to store the current position of robot on x coordinate</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="scripts.server.current_y">
+<span class="sig-prename descclassname"><span class="pre">scripts.server.</span></span><span class="sig-name descname"><span class="pre">current_y</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#scripts.server.current_y" title="Permalink to this definition"></a></dt>
+<dd><p>Global variable to store the current position of robot on y coordinate</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.server.main">
+<span class="sig-prename descclassname"><span class="pre">scripts.server.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/server.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.server.main" title="Permalink to this definition"></a></dt>
+<dd><p>Main function to initialize the ROS node, subscribes to “/position_velocity” topic.
+Initialization of window_size
+It initializes the “service_proxy” to access “/service” service.
+Then it starts a service server for the “/server” and spins to keep the node running.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.server.serve">
+<span class="sig-prename descclassname"><span class="pre">scripts.server.</span></span><span class="sig-name descname"><span class="pre">serve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">req</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/server.html#serve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.server.serve" title="Permalink to this definition"></a></dt>
+<dd><p>Function called when a request is made to the service. It retrieves the last goal
+position.
+This function also computes the average speed by summing all the values in the
+“averaging_window” list and dividing it by the “window_size”. It returns the distance and
+the speed in the response.</p>
+<p>Args:
+req: actually not reqeusted.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="scripts.server.service_proxy">
+<span class="sig-prename descclassname"><span class="pre">scripts.server.</span></span><span class="sig-name descname"><span class="pre">service_proxy</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#scripts.server.service_proxy" title="Permalink to this definition"></a></dt>
+<dd><p>Global variable to store the service proxy to access the “/service” service.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.server.setPosVel">
+<span class="sig-prename descclassname"><span class="pre">scripts.server.</span></span><span class="sig-name descname"><span class="pre">setPosVel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/server.html#setPosVel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.server.setPosVel" title="Permalink to this definition"></a></dt>
+<dd><p>Function called whenever a new message is received on the “/position_velocity” topic.
+It updates the global variables “current_x” and “current_y” with the new position values
+from th message and appends it to the “averaginf_window” list.
+If the lenght of the “averagin_window” exceeds the specified “window_size”, the oldest
+value is removed from the list.</p>
+<p>Args:
+msg: it contains the average speed and the distance between target and robot.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="scripts.server.window_size">
+<span class="sig-prename descclassname"><span class="pre">scripts.server.</span></span><span class="sig-name descname"><span class="pre">window_size</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">20</span></em><a class="headerlink" href="#scripts.server.window_size" title="Permalink to this definition"></a></dt>
+<dd><p>Global variable used as parameter to select the size of the averaging window of the node.</p>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Ramona Ferrari.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
