@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>scripts.server &mdash; ResearchTrack_Assignment2 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=359c27e9"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ResearchTrack_Assignment2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ResearchTrack_Assignment2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">scripts.server</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for scripts.server</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">.. module:: ResearchTrack_Assignment2_server</span>
+
+<span class="sd">:platform: Unix</span>
+<span class="sd">:synopsis: Python service2 for ResearchTrack_Assignment2</span>
+
+<span class="sd">.. moduleauthor:: Ramona Ferrari S4944096@studenti.unige.it</span>
+
+<span class="sd">This node implements a service to subscribe to the robot&#39;s position and velocity.</span>
+<span class="sd">It uses the custom message. </span>
+<span class="sd">It also implements a server to retrieve the distance of the robot from the target and the </span>
+<span class="sd">robot&#39;s average speed.</span>
+
+<span class="sd">There are severals functions implemented:</span>
+<span class="sd">	*setPosVel*;</span>
+<span class="sd">	*serve*.</span>
+<span class="sd">	</span>
+<span class="sd">The command to run the service is ``rosservice call /server``.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">rospy</span>
+<span class="kn">import</span> <span class="nn">actionlib</span>
+<span class="kn">import</span> <span class="nn">actionlib.msg</span>
+<span class="kn">import</span> <span class="nn">assignment_2_2023.msg</span>
+<span class="kn">from</span> <span class="nn">std_srvs.srv</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">assignment_2_2023.msg</span> <span class="kn">import</span> <span class="n">msg_struct</span>
+<span class="kn">from</span> <span class="nn">assignment_2_2023.srv</span> <span class="kn">import</span> <span class="n">distance_speed_srv</span><span class="p">,</span> <span class="n">last_goal_srv</span><span class="p">,</span> <span class="n">distance_speed_srvResponse</span>
+
+<span class="c1"># Global variables </span>
+<span class="n">current_x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="sd">&quot;&quot;&quot;Global variable to store the current position of robot on x coordinate</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">current_y</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="sd">&quot;&quot;&quot;Global variable to store the current position of robot on y coordinate</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">averaging_window</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="sd">&quot;&quot;&quot;List to store the average speed of the robot in the last &quot;window_size&quot; messages received</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">window_size</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="sd">&quot;&quot;&quot;Global variable used as parameter to select the size of the averaging window of the node.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">service_proxy</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="sd">&quot;&quot;&quot;Global variable to store the service proxy to access the &quot;/service&quot; service.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Function to set current position and current velocity of the robot</span>
+<div class="viewcode-block" id="setPosVel"><a class="viewcode-back" href="../../index.html#scripts.server.setPosVel">[docs]</a><span class="k">def</span> <span class="nf">setPosVel</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function called whenever a new message is received on the &quot;/position_velocity&quot; topic.</span>
+<span class="sd">    It updates the global variables &quot;current_x&quot; and &quot;current_y&quot; with the new position values</span>
+<span class="sd">    from th message and appends it to the &quot;averaginf_window&quot; list.</span>
+<span class="sd">    If the lenght of the &quot;averagin_window&quot; exceeds the specified &quot;window_size&quot;, the oldest</span>
+<span class="sd">    value is removed from the list.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">    msg: it contains the average speed and the distance between target and robot.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">current_x</span><span class="p">,</span> <span class="n">current_y</span><span class="p">,</span> <span class="n">averaging_window</span><span class="p">,</span> <span class="n">window_size</span>
+
+    <span class="n">current_x</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">x</span>
+    <span class="n">current_y</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">y</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">averaging_window</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">window_size</span><span class="p">:</span>
+        <span class="n">averaging_window</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># then we remove the oldest value</span>
+    
+    <span class="n">averaging_window</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">vel_x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">msg</span><span class="o">.</span><span class="n">vel_y</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span></div>
+    
+<span class="c1"># Handle to service</span>
+<div class="viewcode-block" id="serve"><a class="viewcode-back" href="../../index.html#scripts.server.serve">[docs]</a><span class="k">def</span> <span class="nf">serve</span><span class="p">(</span><span class="n">req</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function called when a request is made to the service. It retrieves the last goal</span>
+<span class="sd">    position. </span>
+<span class="sd">    This function also computes the average speed by summing all the values in the</span>
+<span class="sd">    &quot;averaging_window&quot; list and dividing it by the &quot;window_size&quot;. It returns the distance and</span>
+<span class="sd">    the speed in the response.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">    req: actually not reqeusted.</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">current_x</span><span class="p">,</span> <span class="n">current_y</span><span class="p">,</span> <span class="n">averaging_window</span><span class="p">,</span> <span class="n">window_size</span><span class="p">,</span> <span class="n">service_proxy</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">service_proxy</span><span class="p">()</span>
+    <span class="n">current_dist</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">current_x</span> <span class="o">-</span> <span class="n">response</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">current_y</span> <span class="o">-</span> <span class="n">response</span><span class="o">.</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">distance_speed_srvResponse</span><span class="p">(</span><span class="n">current_dist</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">averaging_window</span><span class="p">)</span> <span class="o">/</span> <span class="n">window_size</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../index.html#scripts.server.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main function to initialize the ROS node, subscribes to &quot;/position_velocity&quot; topic. </span>
+<span class="sd">    Initialization of window_size</span>
+<span class="sd">    It initializes the &quot;service_proxy&quot; to access &quot;/service&quot; service.</span>
+<span class="sd">    Then it starts a service server for the &quot;/server&quot; and spins to keep the node running.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">global</span> <span class="n">window_size</span><span class="p">,</span> <span class="n">service_proxy</span>
+
+<span class="c1"># Get value of averagin_window</span>
+    <span class="n">window_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rospy</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s1">&#39;/window_size&#39;</span><span class="p">,</span> <span class="s1">&#39;20&#39;</span><span class="p">))</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Get the value of the parameter &quot;window_size&quot; from the ROS parameter server.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Inizialize the node</span>
+    <span class="n">rospy</span><span class="o">.</span><span class="n">init_node</span><span class="p">(</span><span class="s1">&#39;server&#39;</span><span class="p">)</span>
+    
+    <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s2">&quot;/position_velocity&quot;</span><span class="p">,</span> <span class="n">msg_struct</span><span class="p">,</span> <span class="n">setPosVel</span><span class="p">)</span>
+
+<span class="c1"># Proxy which allows to get the last position, launching /service</span>
+    <span class="n">service_proxy</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ServiceProxy</span><span class="p">(</span><span class="s1">&#39;/service&#39;</span><span class="p">,</span> <span class="n">last_goal_srv</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Service proxy to access the &quot;/service&quot; service.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rospy</span><span class="o">.</span><span class="n">wait_for_service</span><span class="p">(</span><span class="s1">&#39;/service&#39;</span><span class="p">)</span>
+
+    <span class="n">rospy</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span><span class="s2">&quot;/server&quot;</span><span class="p">,</span> <span class="n">distance_speed_srv</span><span class="p">,</span> <span class="n">serve</span><span class="p">)</span>
+
+    <span class="n">rospy</span><span class="o">.</span><span class="n">spin</span><span class="p">()</span></div>
+    
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Ramona Ferrari.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
