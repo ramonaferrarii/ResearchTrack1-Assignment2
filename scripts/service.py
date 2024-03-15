@@ -38,8 +38,8 @@ def retrieve_last_goal(msg):
     stores them in the global variables "last_goal_x" and "last_goal_y". 
     
     Args:
-    msg: custom message containing the actual position and velocity of the robot. 
-    The type of the message is assignment_2_2023.msg.
+    	msg: custom message containing the actual position and velocity of the robot. 
+    	The type of the message is assignment_2_2023.msg.
     """
     global last_goal_x, last_goal_y
     last_goal_x = msg.goal.target_pose.pose.position.x
@@ -51,7 +51,7 @@ def serve(req): # note: req is not used
     Callback function to handle requestes for the last goal.
     
     Args: 
-    req: actually not requested.
+    	req: actually not requested.
     """
     global last_goal_x, last_goal_y
     return last_goal_srvResponse(last_goal_x, last_goal_y)
@@ -61,7 +61,7 @@ def main():
     Main function to initialize the node and set up of the service and subscriber.
     
     Args:
-    None
+    	None
     """
     # Initialize the node 
     rospy.init_node("service")

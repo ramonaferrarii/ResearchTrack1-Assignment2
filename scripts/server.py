@@ -56,7 +56,7 @@ def setPosVel(msg):
     value is removed from the list.
     
     Args:
-    msg: it contains the average speed and the distance between target and robot.
+    	msg: it contains the average speed and the distance between target and robot.
     """
     global current_x, current_y, averaging_window, window_size
 
@@ -77,7 +77,7 @@ def serve(req):
     the speed in the response.
     
     Args:
-    req: actually not reqeusted.
+    	req: actually not reqeusted.
     
     
     """

@@ -290,8 +290,11 @@ available. It then prompts the user to enter the goal coordinates (x,y) and send
 <dt class="sig sig-object py" id="scripts.service.main">
 <span class="sig-prename descclassname"><span class="pre">scripts.service.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/service.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.service.main" title="Permalink to this definition"></a></dt>
 <dd><p>Main function to initialize the node and set up of the service and subscriber.</p>
-<p>Args:
-None</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -299,17 +302,25 @@ None</p>
 <span class="sig-prename descclassname"><span class="pre">scripts.service.</span></span><span class="sig-name descname"><span class="pre">retrieve_last_goal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/service.html#retrieve_last_goal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.service.retrieve_last_goal" title="Permalink to this definition"></a></dt>
 <dd><p>Function that retrieves the last goal coordinates from the received goal message and
 stores them in the global variables “last_goal_x” and “last_goal_y”.</p>
-<p>Args:
-msg: custom message containing the actual position and velocity of the robot.
-The type of the message is assignment_2_2023.msg.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> – custom message containing the actual position and velocity of the robot.</p></li>
+<li><p><strong>assignment_2_2023.msg.</strong> (<em>The type</em><em> of </em><em>the message is</em>) – </p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="scripts.service.serve">
 <span class="sig-prename descclassname"><span class="pre">scripts.service.</span></span><span class="sig-name descname"><span class="pre">serve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">req</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/service.html#serve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.service.serve" title="Permalink to this definition"></a></dt>
 <dd><p>Callback function to handle requestes for the last goal.</p>
-<p>Args:
-req: actually not requested.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>req</strong> – actually not requested.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -369,8 +380,11 @@ position.
 This function also computes the average speed by summing all the values in the
 “averaging_window” list and dividing it by the “window_size”. It returns the distance and
 the speed in the response.</p>
-<p>Args:
-req: actually not reqeusted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>req</strong> – actually not reqeusted.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py data">
@@ -387,8 +401,11 @@ It updates the global variables “current_x” and “current_y” with the new
 from th message and appends it to the “averaginf_window” list.
 If the lenght of the “averagin_window” exceeds the specified “window_size”, the oldest
 value is removed from the list.</p>
-<p>Args:
-msg: it contains the average speed and the distance between target and robot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>msg</strong> – it contains the average speed and the distance between target and robot.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py data">
