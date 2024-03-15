@@ -2,6 +2,7 @@
 Ramona Ferrari, S4944096
 
 This is a report for the second assignment of the **Research Track 1** course, for the **Robotics Engineering Master's degree** at the University of Genoa.
+The documentation made by Sphinx can be see at <https://ramonaferrarii.github.io/ResearchTrack_Assignment2/>. 
 
 ## Description of the Simulator
 The simulator shows a 3D simulator enviroment where a robot can move. In the squared arena (specified in the file named `sim_w1.launch`) there are some obstacles: the walls.
