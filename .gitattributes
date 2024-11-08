@@ -1,0 +1,3 @@
+*.py linguaggio=Python
+*.pyw linguaggio=Python
+*.ipynb linguaggio=Jupyter Notebook
